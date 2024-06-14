@@ -1,0 +1,22 @@
+{
+  "days_amount_for_display_by_default": 2,
+  "max_amount_days_for_display": 7,
+  "update_frequency_in_hours": 24,
+  "cities": ["Moscow", "Chicago", "Paris", "London", "Yakutsk"],
+  "x_api_key": "4YcoJIe7j++gExGbEOHPMg==LOGFOcjrW6RPkNff",
+  "morning_beginning_hour": 8,
+  "afternoon_beginning_hour":  13,
+  "evening_beginning_hour": 18,
+  "night_beginning_hour": 23,
+  "switch_to_prev_city_key": "h",
+  "switch_to_next_city_key": "l",
+  "increase_amount_days_to_render_key": "j",
+  "decrease_amount_days_to_render_key": "k",
+  "cyclic_cities_switch_mode": true,
+  "days_cyclic_increase_decrease_mode": false,
+  "bg_color": "#735DA5,",
+  "borders_color": "#A7BEAE",
+  "text_color": "#90EE90",
+  "date_color": "#FCF65",
+  "user_name": "Miron"
+}
