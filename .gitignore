@@ -1,6 +1,8 @@
+
+build
 build
 cmake-build-debug
-.id
-.idea
-bin
+mWeather.exe
+forecasts_data
+last_run_log_file.txt
 .cache
