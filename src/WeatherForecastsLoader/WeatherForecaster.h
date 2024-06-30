@@ -1,13 +1,9 @@
 #pragma once
-#include <iostream>
 #include <ctime>
 #include <vector>
-#include "nlohmann/json.hpp"
-#include "cpr/cpr.h"
-#include "unordered_map"
-#include "src/HelpFunctions/help_functions.h"
+#include <string>
+#include <unordered_map>
 
-using json = nlohmann::json;
 class WForecastForDay;
 class City;
 

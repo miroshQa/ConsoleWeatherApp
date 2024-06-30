@@ -1,11 +1,10 @@
 #include <filesystem>
 #include <cstdlib>
-#include <iterator>
-
+#include <iostream>
+#include <sec_api/stdio_s.h>
 
 #include "src/WeatherPrinter/WeatherPrinter.h"
 
-using json = nlohmann::json;
 
 int main(int argc, char** argv) {
   Config config{};
@@ -14,7 +13,6 @@ int main(int argc, char** argv) {
   if (exe_path != nullptr) {
     std::filesystem::current_path(std::string(exe_path));
   }
-
 
   try {
     config = ConfigParser::ParseConfig("config.json");
@@ -31,6 +29,8 @@ int main(int argc, char** argv) {
   } catch (const std::exception& ex) {
     std::cout << ex.what();
   }
+
+
 }
 
 

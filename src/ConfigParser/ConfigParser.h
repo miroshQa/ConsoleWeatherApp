@@ -1,15 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <filesystem>
-#include <fstream>
-#include "ftxui/component/component.hpp"
-#include "ftxui/component/screen_interactive.hpp"
-#include "ftxui/dom/elements.hpp"
-#include "ftxui/screen/screen.hpp"
-#include "nlohmann/json.hpp"
-
-using json = nlohmann::json;
+#include "ftxui/screen/color.hpp"
 
 
 struct Config {
@@ -32,6 +24,7 @@ struct Config {
     ftxui::Color  borders_color;
     ftxui::Color text_color;
     ftxui::Color date_color;
+    std::string user_name;
 };
 
 class ConfigParser {

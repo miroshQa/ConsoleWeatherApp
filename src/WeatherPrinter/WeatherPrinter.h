@@ -1,20 +1,14 @@
 #pragma once
 
-#include <memory>
 #include <string>
 #include <vector>
 
-#include "ftxui/component/component.hpp"
 #include "ftxui/component/screen_interactive.hpp"
 #include "ftxui/dom/elements.hpp"
-#include "ftxui/screen/screen.hpp"
-#include "nlohmann/json.hpp"
 
 #include "src/ConfigParser/ConfigParser.h"
-#include "src/HelpFunctions/help_functions.h"
 #include "src/WeatherForecastsLoader/WeatherForecaster.h"
 
-using json = nlohmann::json;
 using namespace ftxui;
 
 class WeatherPrinter {

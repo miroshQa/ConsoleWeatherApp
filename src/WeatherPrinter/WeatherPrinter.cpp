@@ -2,6 +2,15 @@
 
 #include "WeatherPrinter.h"
 #include "asci_image_function.h"
+#include <fstream>
+#include "ftxui/component/component.hpp"
+
+inline int NormalizeNumber(int number, int left_bound_inclusive, int right_bound_inclusive, bool is_cyclic_range) {
+    if (is_cyclic_range) {
+        return number < left_bound_inclusive ? right_bound_inclusive : (number > right_bound_inclusive ? left_bound_inclusive : number);
+    }
+    return number < left_bound_inclusive ? left_bound_inclusive : (number > right_bound_inclusive ? right_bound_inclusive : number);
+}
 
 WeatherPrinter::WeatherPrinter(const Config& config) :
     config_(config) {
@@ -9,9 +18,7 @@ WeatherPrinter::WeatherPrinter(const Config& config) :
   WeatherForecaster weather_forecaster(config.x_api_key);
   for (const std::string& city_name : config.cities) {
     try {
-      auto city_weather_date = weather_forecaster.GetForecastsStartingToday(city_name,
-                                                                            config.max_amount_days_for_display,
-                                                                            config.update_frequency_in_hours);
+      auto city_weather_date = weather_forecaster.GetForecastsStartingToday(city_name, config.max_amount_days_for_display, config.update_frequency_in_hours);
 
       forecasts_data_for_cities_.push_back(city_weather_date);
     } catch (const std::exception& ex) {
@@ -73,9 +80,7 @@ void WeatherPrinter::Run() {
   screen.Loop(main_renderer);
 }
 
-Element WeatherPrinter::CreateDayOfTimeForecastVBox(WForecastForDay& w_forecast,
-                                                    int hour,
-                                                    const std::string& time_of_day_string) {
+Element WeatherPrinter::CreateDayOfTimeForecastVBox(WForecastForDay& w_forecast, int hour, const std::string& time_of_day_string) {
   auto symbol = GetWeatherSymbol(std::stoi(w_forecast.GetHourlyInfo(hour, HourlyKey::kWeatherCode)));
   auto asci_image = symbol.first;
   auto image_description = symbol.second;
@@ -108,7 +113,7 @@ Component WeatherPrinter::CreateDayWeatherForecastHBox(WForecastForDay& w_foreca
   auto data_box = hbox(filler(),
                        text(w_forecast.GetDate()) | color(config_.date_color) | borderStyled(config_.borders_color),
                        filler());
-  result = vbox(data_box, filler(),  result );
+  result = vbox(data_box, filler(),  result);
   auto result_component = Renderer([=] { return result; });
   return result_component;
 }

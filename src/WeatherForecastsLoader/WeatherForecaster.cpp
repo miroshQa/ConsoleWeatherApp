@@ -1,5 +1,32 @@
+#include <fstream>
 #include "WeatherForecaster.h"
-#include "src/HelpFunctions/datetime_help_functions.h"
+#include "src/datetime_help_functions.h"
+
+#include "nlohmann/json.hpp"
+#include "cpr/cpr.h"
+
+using json = nlohmann::json;
+
+
+
+template <typename T>
+inline std::vector<std::string> ConvertToStrVector(const json& data, const std::string& field) {
+    std::vector<std::string> result;
+    std::ofstream log_file("last_run_log_file.txt");
+    for (const auto& value : data.at(field)) {
+
+      if (value.is_number()) {
+        std::string num = std::to_string((T)value);
+        log_file << "value is " << num << std::endl;
+        num = num.substr(0, 2 + num.find('.'));
+        result.push_back(num);
+      } else {
+        result.push_back("0");
+      }
+    }
+    return result;
+}
+
 
 WeatherForecaster::WeatherForecaster(const std::string& x_api_key)
     : x_api_key_(x_api_key) {
@@ -73,6 +100,7 @@ City WeatherForecaster::GetForecastsStartingToday(const std::string& city_name,
                                                   int max_amount_hours_from_load_date_of_forecast_data) {
 
   const std::string file_path_with_forecast_for_city = cities_coordinates_dir_path + city_name + ".json";
+
   if (!std::filesystem::exists(file_path_with_forecast_for_city)) {
     LoadCityForecast(city_name);
   }
@@ -93,23 +121,16 @@ City WeatherForecaster::GetForecastsStartingToday(const std::string& city_name,
 
   // After open / update / load our weather forecast data for 16 days we can cut it in separate days
   data = data.at("data").at("hourly");
-  auto apparent_temperature = ConvertToStrVector<double>(data.at("apparent_temperature"));
-  auto relative_humidity_2m = ConvertToStrVector<int>(data.at("relative_humidity_2m"));
-  auto temperature_2m = ConvertToStrVector<double>(data.at("temperature_2m"));
-  auto wind_speed_10m = ConvertToStrVector<double>(data.at("wind_speed_10m"));
-  std::vector<std::string> weather_codes;
-
-  for (auto code : data.at("weather_code")) { // auto const&
-    if (code.is_number_integer()) {
-      weather_codes.push_back(std::to_string((int)code));
-    } else {
-      weather_codes.push_back(0);
-    }
-  }
+  auto apparent_temperature = ConvertToStrVector<double>(data, "apparent_temperature");
+  auto relative_humidity_2m = ConvertToStrVector<int>(data, "relative_humidity_2m");
+  auto temperature_2m = ConvertToStrVector<double>(data, "temperature_2m");
+  auto wind_speed_10m = ConvertToStrVector<double>(data, "wind_speed_10m");
+  auto weather_codes = ConvertToStrVector<int>(data, "weather_code");
+  
 
   std::vector<WForecastForDay> weather_forecasts;
   for (int i = 0; i != forecast_required_days_amount; ++i) {
-    int l = 0 + 24 * (i + amount_days_passed_until_now); // 24 - магическое число
+    int l = 0 + 24 * (i + amount_days_passed_until_now); 
     int r = l + 24;
     std::unordered_map<HourlyKey, std::vector<std::string>> hourly_info = {
         {HourlyKey::kApparentTemperature, {apparent_temperature.begin() + l, apparent_temperature.begin() + r}},

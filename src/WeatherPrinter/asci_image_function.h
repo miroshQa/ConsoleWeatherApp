@@ -1,20 +1,8 @@
 #pragma once
-
-#include "ftxui/component/captured_mouse.hpp"
-#include "ftxui/component/component.hpp"
-#include "ftxui/component/component_base.hpp"
-#include "ftxui/component/component_options.hpp"
-#include "ftxui/component/event.hpp"
-#include "ftxui/component/screen_interactive.hpp"
-#include "ftxui/dom/flexbox_config.hpp"
 #include "ftxui/screen/color.hpp"
-#include "ftxui/screen/color_info.hpp"
-#include "ftxui/screen/terminal.hpp"
 #include "ftxui/dom/elements.hpp"
-#include "ftxui/util/ref.hpp"
 #include "ftxui/screen/color.hpp"
 using namespace ftxui;
-using namespace std::chrono_literals;
 
 /*
 0	Clear sky OK

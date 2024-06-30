@@ -1,5 +1,12 @@
 #include "ConfigParser.h"
 #include <sstream>
+#include <filesystem>
+#include <fstream>
+#include "nlohmann/json.hpp"
+
+
+using json = nlohmann::json;
+
 
 bool IsInRange(int digit, int left, int right) {
   return digit >= left && digit <= right;
@@ -85,5 +92,7 @@ Config ConfigParser::ParseConfig(const std::string& config_path) {
   config.borders_color = ParseRgbValue(config_data, "borders_color");
   config.text_color = ParseRgbValue(config_data, "text_color");
   config.date_color = ParseRgbValue(config_data, "date_color");
+
+  config.user_name = config_data.at("user_name");
   return config;
 }
