@@ -6,3 +6,4 @@ mWeather.exe
 forecasts_data
 last_run_log_file.txt
 .cache
+tasks/

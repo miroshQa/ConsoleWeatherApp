@@ -1,7 +1,6 @@
 #include <filesystem>
 #include <cstdlib>
 #include <iostream>
-#include <sec_api/stdio_s.h>
 
 #include "src/WeatherPrinter/WeatherPrinter.h"
 
