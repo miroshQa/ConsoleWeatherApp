@@ -1,9 +1,8 @@
-
-build
-build
-cmake-build-debug
-mWeather.exe
-forecasts_data
-last_run_log_file.txt
-.cache
+build/
+cmake-build-debug/
+.cache/
+bin/forecasts_data
+bin/last_run_log_file.txt
+bin/mWeather
 tasks/
+mWeather_0.0.1-1_amd64/

@@ -1,4 +1,3 @@
-#include <filesystem>
 #include <cstdlib>
 #include <iostream>
 
@@ -7,14 +6,17 @@
 
 int main(int argc, char** argv) {
   Config config{};
-  const char* exe_path = std::getenv("CONSOLE_WEATHER_APP_EXE_PATH");
 
-  if (exe_path != nullptr) {
-    std::filesystem::current_path(std::string(exe_path));
+
+  char* home_dir_path = std::getenv("HOME");
+  if (home_dir_path == nullptr) {
+    std::cout << "Env variable 'home' is missing. Error";
+    return 1;
   }
 
+  std::string config_path = std::string(home_dir_path) + "/mwConfig.json";
   try {
-    config = ConfigParser::ParseConfig("config.json");
+    config = ConfigParser::ParseConfig(config_path);
   } catch (const std::exception& ex) {
     std::cout << "\nConfig parser error!\t" << "[" << ex.what() << "]" << std::endl;
     std::cout << "Fix errors in config and try again" << std::endl;

@@ -17,7 +17,6 @@ inline std::vector<std::string> ConvertToStrVector(const json& data, const std::
 
       if (value.is_number()) {
         std::string num = std::to_string((T)value);
-        log_file << "value is " << num << std::endl;
         num = num.substr(0, 2 + num.find('.'));
         result.push_back(num);
       } else {

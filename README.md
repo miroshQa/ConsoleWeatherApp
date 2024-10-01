@@ -1,35 +1,38 @@
-# Консольное приложение, отображающие прогноз погоды для выбранного списка городов
+# A console application that displays the weather forecast for a selected list of cities
 
 ![App Preview](readme-images/apppreview.png) 
+*This app was made as a lab in a c++ course at my university*
 
-## Возможности приложения
- - Отображать прогноз погоды на несколько дней вперед (значение по умолчанию задается конфигом)
- - Обновлять с некоторой частотой (задается конфигом)
- - Переключаться между городами с помощью клавиш "h", "l" (задается в конфиге)
- - Заканчивать работу программы по Esc
- - Увеличивать\уменьшать количество дней прогноза по нажатие клавиш "k", "j"
+## Application Features
+ - Display the weather forecast for several days ahead (the default value is set by the config)
+-  Update with some frequency (set by the config)
+ - Switch between cities using the "h", "l" keys (set in the config)
+ - End the program using Esc
+ - Increase/decrease the number of forecast days by pressing the "k", "j" keys
 
-## Как запустить
-#### 1. Удостовериться в наличии:
-- Терминал (Да, тем кто боится терминала стоить закрыть страницу)
-- cmake (Генератор файлов сборки)
-- ninja (Система сборки)
-- git
-- gcc и g++ 13 версии (За остальные версии не ручаюсь)
+## Installation
+### 1. Building from source
+#### 1. Make sure you have the following dependencies: *cmake, ninja, git, gcc, g++*
 
-#### 2. Чтобы собрать приложение нужно открыть терминал и ввести следующие команды:
+#### 2. Open the terminal and enter the commands below
 ```
-git clone https://github.com/miron2363/ConsoleWeatherApp.git   
+git clone https://github.com/miroshQa/ConsoleWeatherApp.git   
 cd ConsoleWeatherApp  
 mkdir build
 cd build
 cmake -G "Ninja" ..
 ninja
+cd ..
 ```
 
-## Как использовать
-1. После сборки проекта перейти в папку bin и ввести команду ./mWeather  
-2. Чтобы выйти нажать ESC.  
-3. Для того чтобы настроить конфигурацию открыть файл config.json   
-4. Для того чтобы запускать программу из любой директории консоли, нужно задать переменную среды CONSOLE_WEATHER_APP_EXE_PATH 
-и сохранить в нее путь до папки, в которой лежит исполняемый файл. Также нужно добавить путь до папки с exe в PATH! Конфиг должен находиться в одной папке с исполняемым файлом и нигде больше!
+## How to use
+1. Copy config from cloned repo to the home directory
+```shell
+cp ./mwConfig.json ~/mwConfig.json
+```
+2. Launch the app
+```shell
+cd bin
+./mWeather
+```
+
