@@ -25,6 +25,11 @@ ninja
 cd ..
 ```
 
+Cmake command for debug build:
+```
+cmake -G "Ninja" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug ..
+```
+
 ## How to use
 1. Copy config from cloned repo to the home directory
 ```shell
